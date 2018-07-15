@@ -4,6 +4,8 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 // json webtoken
 const jwt = require("jsonwebtoken");
+const passport = require('passport');
+
 
 // bring in user model
 const User = require('../../models/User');
@@ -85,7 +87,7 @@ router.post('/login', (req, res) => {
                         // sign token, from jwt documentation. Set time for token to expire (1 day)
                         jwt.sign(
                             payload, 
-                            keys.secretKey, 
+                            keys.secretOrKey, 
                             { expiresIn: 86400 }, 
                             // error if is one, then pass in token
                             (err, token) => {
@@ -103,6 +105,19 @@ router.post('/login', (req, res) => {
                 })
         });
 });
+
+// GET api/users/current
+// private route to return current user
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => {
+    // res.json({ msg: 'Success'});
+    // res.json(req.user);
+    // write custom response to leave out the user email
+    res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
+    });
+})
 
 
 module.exports = router;

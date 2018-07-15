@@ -6,6 +6,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const passport = require('passport');
 
+// validation for inputs
+const validateRegisterInput = require('../../validation/register');
 
 // bring in user model
 const User = require('../../models/User');
@@ -26,11 +28,19 @@ router.get('/test', (req, res) => res.json({ msg: 'users route works'}));
 // POST api/users/register
 // register a user
 router.post('/register', (req, res) => {
+    const { errors, isValid } = validateRegisterInput(req.body);
+
+    // validation check
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+
     // looking for a record of existing email, using findOne
     User.findOne({ email: req.body.email})
         .then(user => {
             // if user already exists send a 400 status and email exists message, else create a new user if no account exists with email provided
             if (user) {
+                // errors.email = 'Email address already being used';
                 return res.status(400).json({email: 'Email address already being used'});
             } else {
                 // set new user to the model User, with the info filled in on the form

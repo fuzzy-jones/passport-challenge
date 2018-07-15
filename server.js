@@ -1,7 +1,7 @@
 // Dependencies
 const express = require("express");
 const mongoose = require('mongoose');
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 // API routes
 const users = require('./routes/api/users');
@@ -9,6 +9,10 @@ const branches = require('./routes/api/branches');
 
 // Initialize Express
 const app = express();
+
+// Sets up the Express app to handle data parsing using body-parser package
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // DB config
 const db = require('./config/keys').mongoURI;
@@ -26,10 +30,6 @@ app.get('/', function(req, res) {
 // routes to files
 app.use('/api/users', users);
 app.use('/api/branches', branches);
-
-// // Sets up the Express app to handle data parsing
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(bodyParser.json());
 
 // port
 const port = process.env.PORT || 8080; 

@@ -2,9 +2,13 @@ const express = require("express");
 const router = express.Router();
 //  bcrypt to encrypt user password
 const bcrypt = require('bcryptjs');
+// json webtoken
+const jwt = require("jsonwebtoken");
 
 // bring in user model
 const User = require('../../models/User');
+// bring in keys for token secret
+const keys = require('../../config/keys');
 
 // // es5 user test route
 // router.get('/test', function(req, res) {
@@ -64,26 +68,40 @@ router.post('/login', (req, res) => {
         .then(user => {
             // if user doesn't exists, 404 not found, and display message
             if (!user) {
-                return res.status(404).json({
-                    email: 'User Email not found'
-                });
+                return res.status(404).json({ email: 'User Email not found' });
             }
 
             // check password using bcrypt to compare hashed password in db to input password
             bcrypt.compare(password, user.password)
                 .then(isMatch => {
                     if(isMatch) {
-                        res.json({
-                            msg: 'Success'
-                        });
+                        // res.json({ msg: 'Success' });
+
+                        // User Matched
+                        const payload = {
+                            id: user.id,
+                            name: user.name
+                        } 
+                        // sign token, from jwt documentation. Set time for token to expire (1 day)
+                        jwt.sign(
+                            payload, 
+                            keys.secretKey, 
+                            { expiresIn: 86400 }, 
+                            // error if is one, then pass in token
+                            (err, token) => {
+                                // send token as a response
+                                res.json({
+                                    // get token back if there is a successful login
+                                    success: true,
+                                    token: 'bearer ' + token
+                                })
+                            });
+
                     } else {
-                        return res.status(400).json({
-                            password: 'Incorrect Password'
-                        });
+                        return res.status(400).json({ password: 'Incorrect Password' });
                     }
                 })
         });
-
 });
 
 

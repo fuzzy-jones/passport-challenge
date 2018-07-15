@@ -1,15 +1,19 @@
 // Dependencies
-var express = require("express");
-var mongoose = require('mongoose');
-// var bodyParser = require("body-parser");
+const express = require("express");
+const mongoose = require('mongoose');
+// const bodyParser = require("body-parser");
+
+// API routes
+const users = require('./routes/api/users');
+const branches = require('./routes/api/branches');
 
 // Initialize Express
-var app = express();
+const app = express();
 
 // DB config
-var db = require('./config/keys').mongoURI;
+const db = require('./config/keys').mongoURI;
 
-// connect to mongoDB
+// mongoose to connect to mongoDB
 mongoose
     .connect(db, { useNewUrlParser: true })
     .then(() => console.log('mongodb connected'))
@@ -19,27 +23,16 @@ app.get('/', function(req, res) {
     res.send('hello world');   
 });
 
+// routes to files
+app.use('/api/users', users);
+app.use('/api/branches', branches);
+
 // // Sets up the Express app to handle data parsing
 // app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(bodyParser.json());
 
 // port
-var port = process.env.PORT || 8080; 
-
-
-// var router = express.Router();
-
-// // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-// router.get('/', function(req, res) {
-//     res.json({ message: 'hooray! welcome to our api!' });   
-// });
-
-// // more routes for our API will happen here
-
-// // REGISTER OUR ROUTES -------------------------------
-// // all of our routes will be prefixed with /api
-// app.use('/api', router);
-
+const port = process.env.PORT || 8080; 
 
 // START THE SERVER
 app.listen(port);

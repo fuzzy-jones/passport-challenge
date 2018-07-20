@@ -58,6 +58,13 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 // update a branch title
 // private route for logged in users
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => { 
+    const { errors, isValid } = validateBranch(req.body);
+
+    // validation check
+    if (!isValid) {
+        return res.status(400).json(errors)
+    }
+    
     Branch.findById(req.params.id)
         .then(branch => {
             branch.title = req.body.title;

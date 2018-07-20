@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 const passport = require('passport');
 
 // validation for inputs
-const validateRegisterInput = require('../../validation/register');
-const validateLoginInput = require('../../validation/login');
+const validateRegister = require('../../validation/register');
+const validateLogin = require('../../validation/login');
 
 // bring in user model
 const User = require('../../models/User');
@@ -29,7 +29,7 @@ router.get('/test', (req, res) => res.json({ msg: 'users route works'}));
 // POST api/users/register
 // register a user
 router.post('/register', (req, res) => {
-    const { errors, isValid } = validateRegisterInput(req.body);
+    const { errors, isValid } = validateRegister(req.body);
 
     // validation check
     if (!isValid) {
@@ -73,7 +73,7 @@ router.post('/register', (req, res) => {
 // User Login and return JWT token
 router.post('/login', (req, res) => {
 
-    const { errors, isValid } = validateLoginInput(req.body);
+    const { errors, isValid } = validateLogin(req.body);
 
     // validation check
     if (!isValid) {

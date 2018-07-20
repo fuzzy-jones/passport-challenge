@@ -2,7 +2,7 @@ const Validator = require('validator');
 // import the isEmpty function from is-empty.js
 const isEmpty = require('./is-empty');
 
-module.exports = function validateBranchInput(data) {
+module.exports = function validateBranch(data) {
     let errors = {};
 
     data.title = !isEmpty(data.title) ? data.title : '';

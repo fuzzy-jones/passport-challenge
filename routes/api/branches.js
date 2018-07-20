@@ -7,17 +7,26 @@ const passport = require('passport');
 const Branch = require('../../models/Branch');
 
 // validation for inputs
-const validateBranchInput = require('../../validation/branch');
+const validateBranch = require('../../validation/branch');
 
 // GET api/branches/test
 // test that branches route works
-router.get('/test', (req, res) => res.json({ msg: 'branch route works'}));
+router.get('/test', (req, res) => res.json({ message: 'branch route works'}));
+
+// Get api/branches
+// get all branches to display
+router.get('/', (req, res) => {
+    // maybe a sort to sort newest first here
+    Branch.find()
+        .then(branches => res.json(branches))
+        .catch(err => res.status(404).json({ message: 'There are no branches' }));
+});
 
 // POST api/branches
 // create a new branch
 // private route only authorized users can create a branch
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateBranchInput(req.body);
+    const { errors, isValid } = validateBranch(req.body);
 
     // validation check
     if (!isValid) {
@@ -32,5 +41,27 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
     newBranch.save().then(branch => res.json(branch));
 
 });
+
+// DELETE  api/branches/:id
+// delete a single branch
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Branch.findById(req.params.id)
+        .then(branch => {
+            branch.remove().then(() => res.json({ message: "branch deleted"}));
+        })
+        .catch(err => res.status(404).json({ message: 'Branch not found' }));
+
+})
+
+// PUT api/branches/:id
+// update a branch title
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => { 
+    Branch.findById(req.params.id)
+        .then(branch => {
+            branch.title = req.body.title;
+            branch.save().then(branch => res.json(branch));
+        })
+    .catch(err => res.status(404).json({ message: 'Updated branch title' }));
+})
 
 module.exports = router;

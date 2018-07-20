@@ -3,7 +3,7 @@ const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
 // take in data to access from outside
-module.exports = function validateRegisterInput(data) {
+module.exports = function validateRegister(data) {
     let errors = {};
 
     // use isEmpty function to store in data to use validators below

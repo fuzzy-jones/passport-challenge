@@ -3,7 +3,7 @@ const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
 // take in data to access from outside
-module.exports = function validateLoginInput(data) {
+module.exports = function validateLogin(data) {
     let errors = {};
 
     data.email = !isEmpty(data.email) ? data.email : '';

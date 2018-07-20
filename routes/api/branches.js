@@ -44,6 +44,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
 // DELETE  api/branches/:id
 // delete a single branch
+// private route for logged in users
 router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     Branch.findById(req.params.id)
         .then(branch => {
@@ -55,6 +56,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 
 // PUT api/branches/:id
 // update a branch title
+// private route for logged in users
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => { 
     Branch.findById(req.params.id)
         .then(branch => {

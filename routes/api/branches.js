@@ -64,7 +64,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
             branch.leaves = req.body.leaves.split(',');
             branch.save().then(branch => res.json(branch));
         })
-    .catch(err => res.status(404).json({ message: 'Updated branch title' }));
+        .catch(err => res.status(404).json({ message: 'Updated branch title' }));
 })
 
 module.exports = router;

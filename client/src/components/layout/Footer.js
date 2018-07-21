@@ -5,6 +5,7 @@ export default () => {
   return (
     <div>
       <footer className="footer">
+        {/* does copyright for current year */}
         Copyright &copy; {new Date().getFullYear()} Fuzzy Jones
       </footer>
     </div>

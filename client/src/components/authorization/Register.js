@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authorizationActions'
+import { registerUser } from '../../actions/authorizationActions';
 
 import "./styles/Register.css"; 
 
@@ -17,6 +17,15 @@ class Register extends Component {
             password2: '',
             errors: {}
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({errors: nextProps.errors});
+            // get the errors from redux state
+            // gets put into props with mapStateToProps
+            // once new properties are received, if errors is included then set it to the errors above in Component state
+        }
     }
 
     onChange(event) {
@@ -33,25 +42,16 @@ class Register extends Component {
             password2: this.state.password2
         }
 
-        // console.log(newUser);
-        // axios.post('/api/users/register', newUser)
-        //     .then(res => console.log(res.data))
-        //     // set the errors to the errors object state
-        //     .catch(err => this.setState({ errors: err.response.data }));
-
-
-        this.props.registerUser(newUser);
+        // this.props.history will redirect within the action instead of component
+        this.props.registerUser(newUser, this.props.history);
     }
     
     render() {
         // const errors = this.state.errors;
         const { errors } = this.state;
 
-        const { user } = this.props.auth;
-
     return (
         <div className="register">
-            { user ? user.name : null }
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
@@ -88,12 +88,14 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
-}
+    auth: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
+};
 
 const mapStateToProps = (state) => ({
-    // putting authentication state in a property of auth, authentication comes from reducers/index.js the root reducer
-    auth: state.authentication
-})
+    // set auth as a prop inside component, authentication comes from reducers/index.js the root reducer
+    auth: state.authentication,
+    errors: state.errors
+});
 
-export default connect(mapStateToProps, { registerUser })(Register);
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+// import axios from 'axios';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+import { registerUser } from '../../actions/authorizationActions'
+
 import "./styles/Register.css"; 
 
 class Register extends Component {
@@ -30,18 +34,24 @@ class Register extends Component {
         }
 
         // console.log(newUser);
-        axios.post('/api/users/register', newUser)
-            .then(res => console.log(res.data))
-            // set the errors to the errors object state
-            .catch(err => this.setState({ errors: err.response.data }));
+        // axios.post('/api/users/register', newUser)
+        //     .then(res => console.log(res.data))
+        //     // set the errors to the errors object state
+        //     .catch(err => this.setState({ errors: err.response.data }));
+
+
+        this.props.registerUser(newUser);
     }
     
     render() {
         // const errors = this.state.errors;
         const { errors } = this.state;
 
+        const { user } = this.props.auth;
+
     return (
         <div className="register">
+            { user ? user.name : null }
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
@@ -76,4 +86,14 @@ class Register extends Component {
     }
 }
 
-export default Register;
+Register.propTypes = {
+    registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+    // putting authentication state in a property of auth, authentication comes from reducers/index.js the root reducer
+    auth: state.authentication
+})
+
+export default connect(mapStateToProps, { registerUser })(Register);

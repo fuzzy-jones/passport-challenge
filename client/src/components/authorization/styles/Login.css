@@ -6,3 +6,8 @@
 #login-submit {
     background-color: #6FB84F
 }
+
+.invalid-feedback {
+    text-align: left;
+    padding-left: 13px;
+}

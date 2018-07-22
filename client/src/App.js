@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 // BrowserRouter mimics standard server and can use back and forward buttons
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentUser } from './actions/authorizationActions';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -12,6 +15,17 @@ import Login from "./components/authorization/Login";
 import Register from "./components/authorization/Register";
 
 import './App.css';
+
+// token checker
+if (localStorage.jwtToken) {
+  // set token header
+  setAuthToken(localStorage.jwtToken);
+  // decode token and get info
+  const decoded = jwt_decode(localStorage.jwtToken);
+  // set user isAuthenticated
+  // store.dispatch calls anything in the store
+  store.dispatch(setCurrentUser(decoded));
+}
 
 class App extends Component {
   render() {

@@ -1,13 +1,8 @@
 .container {
     text-align: center;
-    background-color: #0F7B47;
-    max-width: 100%;
-    margin: 0;
-    padding-bottom: 20px;
+    
 }
 
-.btn {
-    background-color: #D1C0A6;
-    color: black;
-    border: 1px solid black;
+#branch-logo {
+    max-width: 500px;
 }

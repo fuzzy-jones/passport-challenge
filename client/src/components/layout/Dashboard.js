@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 // import { addBranch } from '../../actions/treeActions';
 
 import "./styles/Dashboard.css";
-import logo from "./styles/images/totoro.jpg";
+import logo from "./styles/images/branch.PNG";
 
 class Dashboard extends Component {
     constructor(props) {
@@ -22,13 +22,14 @@ class Dashboard extends Component {
 
         return (
             <div className="container">
-                <img className="img-responsive" src={logo} alt="tree logo"/>
+                <img className="img-responsive" src={logo} alt="branch logo" id="branch-logo"/>
                 <div className="row">
                     <div className="col-md-4 m-auto">
                         <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Create a new Branch</button>
                     </div>
                 </div>
-           
+
+
                 {/* add branch modal */}
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">

@@ -19,7 +19,7 @@ class Landing extends Component {
   render() {
     return (
       <div className="landing">
-        <img className="img-responsive" src={logo} alt="tree logo"/>
+        <img className="img-responsive" src={logo} alt="tree logo" id="tree-logo"/>
         <h1>Passport Tree Challenge</h1>
         <p>Sign up or Log in to access and edit the tree</p>
         <Link type="button" to="/register" className="btn btn-lg btn-primary" id="signup-button">Sign Up</Link>

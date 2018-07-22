@@ -1,3 +1,5 @@
 .navbar {
     color: 	#1D3738;
+    /* had to use important to overwrite, since the bootswatch theme cdn was using important */
+    background-color: #f0f1f0 !important;
 }

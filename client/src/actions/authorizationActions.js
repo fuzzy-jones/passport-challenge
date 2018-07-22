@@ -53,5 +53,18 @@ export const setCurrentUser = (decoded) => {
         // once current user is dispatched it needs to be caught in the auth reducer
         type: SET_CURRENT_USER,
         payload: decoded
-    }
+    };
+};
+
+// logout
+export const logoutUser = () => dispatch => {
+    // remove the token from the local storage
+    localStorage.removeItem('jwtToken');
+    // remove auth header
+    // set it to false, so when utils/setAuthToken checks and token is false it deletes auth header
+    setAuthToken(false);
+    // set current user to an empty object, which makes authenticated false
+    // sets authenticated to false in authenticationReducer.js
+    // then user will get send to payload, which will be an empty object, set back to initial state logging user out
+    dispatch(setCurrentUser({}));
 }

@@ -19,6 +19,14 @@ class Register extends Component {
         };
     }
 
+    // life cycle methods
+    // so the user cant manually type in login route if they are already logged in
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         if(nextProps.errors) {
             this.setState({errors: nextProps.errors});

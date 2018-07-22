@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { PropTypes } from 'prop-types';
+import { connect } from 'react-redux';
+
 import "./styles/Landing.css";
 import logo from "./styles/images/totoro.gif";
 
 class Landing extends Component {
+
+  // life cycle methods
+  // so the user cant manually type in login or landing routes if they are already logged in
+  componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+        this.props.history.push('/dashboard');
+    }
+  }
+
   render() {
     return (
       <div className="landing">
@@ -17,5 +29,13 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+Landing.propTypes = {
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  auth: state.authentication
+});
+
+export default connect(mapStateToProps)(Landing);
 

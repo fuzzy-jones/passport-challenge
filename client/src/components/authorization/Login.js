@@ -17,6 +17,14 @@ class Login extends Component {
         };
     }
 
+    // life cycle methods
+    // so the user cant manually type in login or landing routes if they are already logged in
+    componentDidMount() {
+        if(this.props.auth.isAuthenticated) {
+            this.props.history.push('/dashboard');
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         // check if user is authenticated
         if(nextProps.auth.isAuthenticated) {

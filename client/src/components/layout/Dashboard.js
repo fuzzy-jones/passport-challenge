@@ -3,20 +3,12 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
 // import { addBranch } from '../../actions/treeActions';
+import AddForm from '../modals/AddForm';
 
 import "./styles/Dashboard.css";
 import logo from "./styles/images/branch.PNG";
 
 class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state ={
-            title: '',
-            leaves: [],
-            errors: {}
-        }
-    }
-
     render() {
         // const { errors } = this.state;
 
@@ -30,28 +22,8 @@ class Dashboard extends Component {
                 </div>
 
 
-                {/* add branch modal */}
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Add Branch</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                            
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Add</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+                {/* add branch modal component */}
+                <AddForm />
 
             </div>
 

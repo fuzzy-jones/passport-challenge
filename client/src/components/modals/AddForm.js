@@ -10,9 +10,9 @@ class AddForm extends Component {
         super(props);
         this.state ={
             title: '',
-            leaves: [],
+            leaves: '',
             errors: {}
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -37,7 +37,8 @@ class AddForm extends Component {
         }
 
         // this.props.history will redirect within the action, instead of component
-        this.props.addBranch(newBranch, this.props.history);
+        this.props.addBranch(newBranch);
+        this.setState({ title: '', leaves: ''});
     }
 
     render() {
@@ -61,7 +62,7 @@ class AddForm extends Component {
                                 </div>
                                 {/* leaves for testing, needs to change and random number logic */}
                                 <div className="form-group">
-                                    <input type="text" className={classnames("form-control", {'is-invalid': errors.leaves})} placeholder="Random Numbers" name="numbers" value={this.state.leaves} onChange={this.onChange.bind(this)}/>
+                                    <input type="text" className={classnames("form-control", {'is-invalid': errors.leaves})} placeholder="Random Numbers" name="leaves" value={this.state.leaves} onChange={this.onChange.bind(this)}/>
                                     {errors.leaves && (<div className="invalid-feedback">{errors.leaves}</div>)}
                                 </div>
                                 <button type="submit" className="btn btn-lg btn-primary" id="branch-submit">Submit</button>

@@ -16,8 +16,8 @@ export const addBranch = (branchData) => dispatch => {
                 type: GET_ERRORS,
                 payload: err.response.data
             })
-        )
-}
+        );
+};
 
 // get all branches from DB
 // export const getBranches = () => dispatch => {

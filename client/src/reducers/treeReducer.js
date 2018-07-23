@@ -1,4 +1,4 @@
-// import { GET_BRANCHES } from '../actions/types';
+import { ADD_BRANCH } from '../actions/types';
 
 const initialState = {
     branches: [],
@@ -7,6 +7,11 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case ADD_BRANCH:
+            return {
+                ...state,
+                branches: [action.payload, ...state.branches]
+            }
         default:
             return state;
     }

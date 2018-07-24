@@ -31,6 +31,9 @@ class AddForm extends Component {
     onSubmit(event) {
         event.preventDefault();
 
+        // if ('is-invalid') {
+        //     console.log("field validation is required");
+        // } else {
         const newBranch = {
             title: this.state.title,
             leaves: this.state.leaves
@@ -39,6 +42,9 @@ class AddForm extends Component {
         // this.props.history will redirect within the action, instead of component
         this.props.addBranch(newBranch);
         this.setState({ title: '', leaves: ''});
+        // need to redirect back to dashboard page after successful branch submit
+        // window.location.reload();
+        // }
     }
 
     render() {
@@ -65,7 +71,7 @@ class AddForm extends Component {
                                     <input type="text" className={classnames("form-control", {'is-invalid': errors.leaves})} placeholder="Random Numbers" name="leaves" value={this.state.leaves} onChange={this.onChange.bind(this)}/>
                                     {errors.leaves && (<div className="invalid-feedback">{errors.leaves}</div>)}
                                 </div>
-                                <button type="submit" className="btn btn-lg btn-primary" id="branch-submit">Submit</button>
+                                <button type="submit" className="btn btn-lg btn-success" id="branch-submit">Submit</button>
                             </form>
                         </div>
                         {/* <div className="modal-footer">

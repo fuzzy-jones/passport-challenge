@@ -1,4 +1,4 @@
-import { ADD_BRANCH } from '../actions/types';
+import { ADD_BRANCH, GET_BRANCHES } from '../actions/types';
 
 const initialState = {
     branches: [],
@@ -7,6 +7,13 @@ const initialState = {
 
 export default function(state = initialState, action) {
     switch(action.type) {
+        case GET_BRANCHES:
+            return {
+                // current state
+                ...state,
+                // fill with payload of all the posts
+                branches: action.payload
+            }
         case ADD_BRANCH:
             return {
                 ...state,

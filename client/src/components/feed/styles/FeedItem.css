@@ -1,0 +1,14 @@
+.branchList {
+    text-align: left;
+    margin-top: 20px;
+}
+
+
+.branchWrapper {
+    /* cursor: pointer; */
+    font-weight: bold;
+}
+
+.branchWrapper button {
+    margin-left: 10px;
+}

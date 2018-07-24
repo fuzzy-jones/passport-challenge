@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ADD_BRANCH, GET_ERRORS, GET_BRANCHES } from './types';
+import { ADD_BRANCH, GET_ERRORS, GET_BRANCHES, DELETE_BRANCH } from './types';
 
 // add branch to tree
 export const addBranch = (treeData) => dispatch => {
@@ -35,4 +35,23 @@ export const getBranches = () => dispatch => {
                 payload: null
             })
         )
+};
+
+// delete branch
+export const deleteBranch = id => dispatch => {
+    // back ticks in route to use variable without concatenating 
+    axios.delete(`/api/branches/${id}`)
+        .then(res => 
+            dispatch({
+                type: DELETE_BRANCH,
+                // send id
+                payload: id
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
 };

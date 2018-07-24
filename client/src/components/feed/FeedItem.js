@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 // import classnames from 'classnames';
 // import { Link } from 'react-router-dom';
 
+import { deleteBranch } from '../../actions/treeActions';
+
 import "./styles/FeedItem.css";
 
 class FeedItem extends Component {
@@ -14,7 +16,7 @@ class FeedItem extends Component {
 
     // method to delete a branch with the onClick event on the delete button
     onDelete(id) {
-        console.log(id);
+        this.props.deleteBranch(id);
     }
 
     render() {
@@ -43,6 +45,7 @@ class FeedItem extends Component {
 }
 
 FeedItem.propTypes = {
+    deleteBranch: PropTypes.func.isRequired,
     branch: PropTypes.object.isRequired
 }
 
@@ -50,4 +53,4 @@ const mapStateToProps = state => ({
     
 })
 
-export default connect(mapStateToProps)(FeedItem);
+export default connect(mapStateToProps, { deleteBranch })(FeedItem);

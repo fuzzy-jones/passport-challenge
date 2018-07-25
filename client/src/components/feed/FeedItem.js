@@ -36,10 +36,10 @@ class FeedItem extends Component {
                 <li>
                     <div className="branchWrapper">
                         <aside>
-                            <h3 className="branchTitle">{branch.title}    
+                            <h2 className="branchTitle">{branch.title}    
                                 <button type="button" className="btn btn-success" data-toggle="modal" data-target="#updateModal"><i className="fas fa-edit"/></button>
                                 <button onClick={this.onDelete.bind(this, branch._id)} type="button" className="btn btn-danger"><i className="far fa-trash-alt"/></button>
-                            </h3>
+                            </h2>
                         </aside>
                     </div>
                     <ul className="leafReturn">

@@ -1,4 +1,10 @@
 .leafList {
-    background-color: lightpink;
+    background-color: #ECC6B5;
     margin-bottom: 2px;
+    text-align: center;
+    margin-left: 100px;
+    margin-right: 200px;
+    color: #260E0E;
+    font-size: 20px;
+    border-radius: 25px;
 }

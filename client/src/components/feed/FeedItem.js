@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 import { deleteBranch } from '../../actions/treeActions';
 
+import LeafFeed from '../leaves/LeafFeed';
+
 import "./styles/FeedItem.css";
 
 class FeedItem extends Component {
@@ -21,7 +23,13 @@ class FeedItem extends Component {
 
     render() {
         const { branch } = this.props;
-        
+
+        // console.log(branch.leaves);
+        // for (let i = 0; i < branch.leaves.length; i++) {
+        //     let leaves = branch.leaves[i];
+        //     console.log(leaves);
+        // }
+
         return (
         <div className="branchList">
             <ul>
@@ -34,8 +42,8 @@ class FeedItem extends Component {
                             </h3>
                         </aside>
                     </div>
-                    <ul>
-                        <li className="leaf">{branch.leaves.length}</li>
+                    <ul className="leafReturn">
+                        <LeafFeed leaves={branch.leaves} />
                     </ul>
                 </li>
             </ul>
@@ -47,10 +55,11 @@ class FeedItem extends Component {
 FeedItem.propTypes = {
     deleteBranch: PropTypes.func.isRequired,
     branch: PropTypes.object.isRequired
+
 }
 
 const mapStateToProps = state => ({
-    
+ 
 })
 
 export default connect(mapStateToProps, { deleteBranch })(FeedItem);

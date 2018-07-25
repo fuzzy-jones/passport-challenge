@@ -13,6 +13,11 @@ class Navbar extends Component {
     onLogoutClick(event) {
         event.preventDefault();
         this.props.logoutUser();
+        this.logOutToHome();
+    }
+
+    logOutToHome() {
+        window.location.href = '/';
     }
 
     render() {

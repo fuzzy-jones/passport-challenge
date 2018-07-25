@@ -10,7 +10,6 @@ class UpdateForm extends Component {
         super(props);
         this.state ={
             title: '',
-            leaves: '',
             errors: {}
         };
     }
@@ -72,10 +71,10 @@ class UpdateForm extends Component {
                                     {errors.title && (<div className="invalid-feedback">{errors.title}</div>)}
                                 </div>
                                 {/* leaves for testing, needs to change and random number logic */}
-                                <div className="form-group">
+                                {/* <div className="form-group">
                                     <input type="text" className={classnames("form-control", {'is-invalid': errors.leaves})} placeholder="Random Numbers" name="leaves" value={this.state.leaves} onChange={this.onChange.bind(this)}/>
                                     {errors.leaves && (<div className="invalid-feedback">{errors.leaves}</div>)}
-                                </div>
+                                </div> */}
                                 <button onClick={this.onUpdate.bind(this, branch._id)} type="submit" className="btn btn-lg btn-success" id="branch-submit">Submit</button>
                             </form>
                         </div>

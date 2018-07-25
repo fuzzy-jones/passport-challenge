@@ -9,7 +9,7 @@ class LeafItem extends Component {
       const { leaf } = this.props;
 
     return (
-      <li className="leafList">{leaf}</li>
+      <li className="leafList"><p>{leaf}</p></li>
     )
   }
 }

@@ -10,6 +10,9 @@ class AddForm extends Component {
         super(props);
         this.state ={
             title: '',
+            number: '',
+            minNumber: '',
+            maxNumber: '',
             leaves: '',
             errors: {}
         };
@@ -28,15 +31,39 @@ class AddForm extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
+    // numberGenerator() {
+    //     let leafNumber = this.state.number;
+    //     console.log(leafNumber);
+    //     var leafArray = [];
+    //     console.log(leafArray);
+    //     for (let i = 0; i < leafNumber; i++) {
+    //         var randomNumber = Math.floor((Math.random() * this.state.maxNumber) + this.state.minNumber);
+    //         console.log(randomNumber);
+    //         leafArray.push(randomNumber);
+    //     }
+    // }
+
     onSubmit(event) {
         event.preventDefault();
 
+        // generating the random numbers based on the inputs from the form
+        let leafNumber = this.state.number;
+        var leafArray = [];
+        // run a loop to the amount of the numbers chosen
+        // then generate set of random numbers to the min and max input on the form
+        // turn the numbers into a string and push them into an array. then .join() when passing to the newBranch so it can pass into the DB
+        for (let i = 0; i < leafNumber; i++) {
+            var randomNumber = Math.floor((Math.random() * this.state.maxNumber) + this.state.minNumber);
+            var stringNumbers = randomNumber.toString();
+            leafArray.push(stringNumbers);
+        }
+        
         // if ('is-invalid') {
         //     console.log("field validation is required");
         // } else {
         const newBranch = {
             title: this.state.title,
-            leaves: this.state.leaves
+            leaves: leafArray.join()
         }
 
         // this.props.history will redirect within the action, instead of component
@@ -51,7 +78,7 @@ class AddForm extends Component {
         const { errors } = this.state;
 
         return (
-            <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div className="modal fade" id="createBranchModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -68,8 +95,22 @@ class AddForm extends Component {
                                 </div>
                                 {/* leaves for testing, needs to change and random number logic */}
                                 <div className="form-group">
-                                    <input type="text" className={classnames("form-control", {'is-invalid': errors.leaves})} placeholder="Random Numbers" name="leaves" value={this.state.leaves} onChange={this.onChange.bind(this)}/>
-                                    {errors.leaves && (<div className="invalid-feedback">{errors.leaves}</div>)}
+                                    <aside>
+                                        <p>How many numbers for this branch</p>
+                                        <select name="number" value={this.state.number} onChange={this.onChange.bind(this)}> 
+                                            <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
+                                        </select>
+                                        {errors.leaves && (<div className="invalid-feedback">{errors.leaves}</div>)}
+                                    </aside>
+                                    <aside>
+                                        <p>Number Range</p>
+                                        <input type="text" placeholder="Minimum Number" name="minNumber" value={this.state.minNumber} onChange={this.onChange.bind(this)} id="minNum"/>
+                                        
+                                        <input type="text" placeholder="Maximum Number" name="maxNumber" value={this.state.maxNumber} onChange={this.onChange.bind(this)} id="maxNum"/>
+                                        
+                                    </aside>
+                                    {/* <input type="text" className={classnames("form-control", {'is-invalid': errors.leaves})} placeholder="Random Numbers" name="leaves" value={this.state.leaves} onChange={this.onChange.bind(this)}/>
+                                    {errors.leaves && (<div className="invalid-feedback">{errors.leaves}</div>)} */}
                                 </div>
                                 <button type="submit" className="btn btn-lg btn-success" id="branch-submit">Submit</button>
                             </form>

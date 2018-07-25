@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import './styles/leafItem.css'
+
 class LeafItem extends Component {
   render() {
       const { leaf } = this.props;
 
     return (
-      <li>{leaf}</li>
+      <li className="leafList">{leaf}</li>
     )
   }
 }

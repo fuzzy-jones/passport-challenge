@@ -9,7 +9,11 @@ class LeafItem extends Component {
       const { leaf } = this.props;
 
     return (
-      <li className="leafList"><p>{leaf}</p></li>
+      <div className="row">
+      <div className="col-md-3 offset-md-1">
+      <li className="leafList"><span><p><i className="fas fa-leaf" id="leafIcon"></i>{leaf}</p></span></li>
+      </div>
+      </div>
     )
   }
 }

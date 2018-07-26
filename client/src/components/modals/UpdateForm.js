@@ -37,11 +37,11 @@ class UpdateForm extends Component {
         const newUpdatedBranch = {
             title: this.state.title,
             leaves: this.state.leaves
-        }
+        }        
 
         // this.props.history will redirect within the action, instead of component
         this.props.updateBranch(newUpdatedBranch);
-        this.setState({ title: '', leaves: ''});
+        this.setState({ title: ''});
        
     }
 

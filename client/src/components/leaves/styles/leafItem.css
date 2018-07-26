@@ -2,9 +2,18 @@
     background-color: #ECC6B5;
     margin-bottom: 2px;
     text-align: center;
-    margin-left: 25px;
-    margin-right: 125px;
     color: #260E0E;
     font-size: 20px;
     border-radius: 25px;
+}
+
+li {
+    list-style-type: none;
+}
+
+#leafIcon {
+    padding-left: 7px;
+    padding-top: 5px;
+    float: left;
+    color: 	#D82946;
 }

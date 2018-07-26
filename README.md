@@ -32,6 +32,11 @@ creating ​a ​live-updating ​tree ​view ​as ​a ​web ​application.
 * redux
 * redux-thunk
 
+## Hosting
+
+* mLab
+* Heroku
+
 ## Challenge Requirements
 
 * The ​tree ​should ​contain ​a ​group ​of ​nodes, ​with ​a
@@ -83,6 +88,12 @@ and ​backend ​codebase ​built ​by ​you.
 
 * Please ​submit ​your ​project, ​link, ​and ​source
 to ​the ​email ​listed ​below.
+
+## Screen Grabs
+
+![home](public/assets/home.PNG "Home")
+
+![dashboard](public/assets/dashboard.PNG "Dashboard")
 
 
 

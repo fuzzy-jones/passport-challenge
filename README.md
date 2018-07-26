@@ -10,7 +10,7 @@ creating ​a ​live-updating ​tree ​view ​as ​a ​web ​application.
 * Node.js
 * React
 
-## Dependencies
+### Dependencies
 * bcryptjs
 * body-parser
 * concurrently
@@ -32,7 +32,7 @@ creating ​a ​live-updating ​tree ​view ​as ​a ​web ​application.
 * redux
 * redux-thunk
 
-## Hosting
+### Hosting
 
 * mLab
 * Heroku

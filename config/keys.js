@@ -1,5 +1,5 @@
-module.exports = {
-    mongoURI:
-    'mongodb://fuzzy:Zombie666@ds137611.mlab.com:37611/passportchallenge',
-    secretOrKey: 'secret'
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./keys_prod');
+} else {
+    module.exports = require('./keys_dev');
 }

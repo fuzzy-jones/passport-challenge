@@ -2,7 +2,7 @@ import { createStore, applyMiddleware} from 'redux';
 // creating middleware
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 // create variable of initialState and set it to an empty object, and pass it as a argument in createStore rather than have an empty object as arg
 const initialState = {};
